@@ -1,5 +1,5 @@
 const BN = require('../lib/bn')
-const { utils: coinUtils } = require('@lamassu/coins')
+const { createWallet } = require('../lib/crypto/wallet-generator')
 const printerLoader = require('../lib/printer/loader')
 
 const deviceConfig = require('../device_config.json')
@@ -14,7 +14,7 @@ if (!printType || (printType !== 'wallet' && printType !== 'receipt')) {
 printerLoader.load(deviceConfig.kioskPrinter)
   .then(printer => {
     if (printType === 'wallet') {
-      const wallet = coinUtils.createWallet('BTC')
+      const wallet = createWallet('BTC')
       printer.printWallet(wallet, deviceConfig.kioskPrinter)
     }
 

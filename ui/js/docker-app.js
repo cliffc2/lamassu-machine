@@ -1636,7 +1636,7 @@ function setCredit(credit, lastBill) {
 
   var coin = getCryptoCurrency(cryptoCode);
 
-  var scale = new BigNumber(10).pow(coin.displayScale);
+  var scale = new BigNumber(10).pow(coin.unitScale);
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).toNumber();
   var cryptoDisplayCode = coin.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
@@ -1979,9 +1979,8 @@ function chooseFiat(data) {
 
 function displayCrypto(cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode);
-  var scale = new BigNumber(10).pow(coin.displayScale);
-  // number of decimal places vary based on displayScale value
-  var decimalPlaces = coin.displayScale - coin.unitScale + 6;
+  var scale = new BigNumber(10).pow(coin.unitScale);
+  var decimalPlaces = 6;
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
   return formatCrypto(cryptoAmount);
 }
